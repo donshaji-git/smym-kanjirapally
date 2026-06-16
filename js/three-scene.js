@@ -8,14 +8,14 @@
     const canvas = document.getElementById('three-canvas');
     if (!canvas) return;
 
-    const container = document.getElementById('hero-right');
+    const container = document.getElementById('hero-center-logo');
     if (!container) return;
 
     // --- Scene Setup ---
     const scene = new THREE.Scene();
 
-    // Camera
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+    // Camera - Square aspect ratio matching CSS aspect-ratio: 1
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
     camera.position.z = 8;
 
     // Renderer
@@ -24,7 +24,8 @@
         alpha: true,
         antialias: true
     });
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    const size = Math.min(container.clientWidth, 380);
+    renderer.setSize(size, size);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
 
@@ -115,13 +116,12 @@
 
     // --- Responsive Resize ---
     window.addEventListener('resize', () => {
-        const width = container.clientWidth;
-        const height = container.clientHeight;
+        const size = Math.min(container.clientWidth, 380);
 
-        camera.aspect = width / height;
+        camera.aspect = 1;
         camera.updateProjectionMatrix();
 
-        renderer.setSize(width, height);
+        renderer.setSize(size, size);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     });
 

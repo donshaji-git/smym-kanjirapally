@@ -224,6 +224,16 @@ ul { list-style: none; }
     transition: all 0.3s ease;
 }
 
+.nav-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+.nav-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
 /* Mobile menu */
 .mobile-menu {
     position: fixed;
@@ -405,7 +415,7 @@ ul { list-style: none; }
 
 .hero-inner {
     display: grid;
-    grid-template-columns: 1.25fr 1fr 1.25fr;
+    grid-template-columns: 1.5fr 0.8fr 1.5fr;
     gap: 3rem;
     align-items: center;
     width: 100%;
@@ -452,6 +462,12 @@ ul { list-style: none; }
 .line-mask {
     overflow: hidden;
     display: block;
+    padding: 0 0.1em;
+    margin: 0 -0.1em;
+}
+.line-script {
+    padding: 0.1em 0.3em;
+    margin: -0.1em -0.3em;
 }
 .line-inner {
     display: block;
@@ -526,6 +542,8 @@ ul { list-style: none; }
     border: 2px solid rgba(212,175,55,0.4);
     background: var(--ivory);
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 .hero-logo-vid {
     position: absolute;
@@ -535,6 +553,9 @@ ul { list-style: none; }
     object-fit: cover;
     opacity: 0;
     transition: opacity 0.8s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 .hero-logo-vid.active {
     opacity: 1;
@@ -1306,12 +1327,13 @@ ul { list-style: none; }
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════════ */
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
     .activities-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .hero-inner { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
     .hero-left { text-align: center !important; }
     .hero-left .hero-eyebrow { margin: 0 auto 1.5rem !important; }
+    .hero-title { font-size: clamp(2rem, 8vw, 2.8rem); }
     .hero-center { min-height: 280px; order: -1; }
     .hero-right-details { text-align: center !important; }
     .hero-mission { margin: 0 auto 2.5rem !important; }

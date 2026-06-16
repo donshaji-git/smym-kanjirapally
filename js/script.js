@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const rect = logoWrap.getBoundingClientRect();
             const x = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
             const y = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
-            logoWrap.style.transform = `perspective(500px) rotateX(${-y * 15}deg) rotateY(${x * 15}deg) scale(1.06)`;
+            logoWrap.style.transform = `perspective(500px) rotateX(${-y * 15}deg) rotateY(${x * 15}deg) scale(1.06) translateZ(0)`;
         });
         logoWrap.addEventListener('mouseleave', () => {
             logoWrap.style.transform = '';
@@ -327,5 +327,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.4 });
 
     sections.forEach(s => sectionObs.observe(s));
+
+
+    /* ══════════════════════════════════════════
+       10. MOBILE MENU TOGGLE
+    ══════════════════════════════════════════ */
+    const navToggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (navToggle && mobileMenu) {
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Close menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
+    }
 
 });
